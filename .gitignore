@@ -1,3 +1,4 @@
 node_modules
-config
-certs
+config/*
+certs/*
+client_configs/*

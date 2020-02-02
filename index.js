@@ -1,5 +1,6 @@
 const https = require('https');
 const fs = require('fs');
+const util = require('util');
 
 const axios = require('axios');
 const createRandomString = require('crypto-random-string');
@@ -47,26 +48,34 @@ const getAuthHeaders = (options = {}) => {
     return authHeadersObj;
 }   
 
-const getUsers = (options = {}) => {
+const users = async (options = {}) => {
     let defaultOptions = {
         action: ACTIONS.LIST,
         credentials: DEFAULT_CONFIG,
-        baseUrl: DEFAULT_CONFIG.BASE_URL
+        baseUrl: DEFAULT_CONFIG.BASE_URL,
+        orgId: 1
     };
     options = Object.assign({}, defaultOptions, options);
 
     switch(options.action){
         case ACTIONS.LIST:
+            let method = "GET";
+            let path = `/user/${options.orgId}`;
+            let authHeaders = getAuthHeaders({
+                method,
+                path,
+                credentials: options.credentials
+            });
             return axios({
                 method: "get",
-                url: `${options.baseUrl}/user/${options.orgId}`,
-                headers: options.credentials
+                url: `${options.baseUrl}${path}`,
+                headers: authHeaders
             });
     }
 }
 
 
-const getOrganization = async (options = {}) => {
+const organizations = async (options = {}) => {
     let defaultOptions = {
         action: ACTIONS.LIST,
         credentials: DEFAULT_CONFIG,
@@ -85,14 +94,48 @@ const getOrganization = async (options = {}) => {
             });
             return axios({
                 method,
-                url: `${options.baseUrl}/organization`,
+                url: `${options.baseUrl}${path}`,
                 headers: authHeaders 
             });
     }
 }
 
+const key = async (options = {}) => {
+    let defaultOptions = {
+        action: ACTIONS.GET,
+        orgId: 1,
+        userId: 1,
+        credentials: DEFAULT_CONFIG,
+        baseUrl: DEFAULT_CONFIG.BASE_URL
+    };
+    options = Object.assign({}, defaultOptions, options);
+
+    switch(options.action){
+        case ACTIONS.GET:
+            let method = "GET";
+            let path = `/key/${options.orgId}/${options.userId}.tar`;
+            let authHeaders = getAuthHeaders({
+                method,
+                path,
+                credentials: options.credentials
+            });
+            return axios({
+                method,
+                url: `${options.baseUrl}${path}`,
+                headers: authHeaders
+            })
+    }
+}
+
 
 (async() => {
-    let organizationId = (await getOrganization()).data[0].id;
-    console.log(organizationId);
+    let organizationId = (await organizations({action: ACTIONS.LIST})).data[0].id;
+    let usersArr = (await users({action: ACTIONS.LIST, orgId: organizationId})).data;
+    usersArr.forEach(async (user) => {
+        let res = (await key({action: ACTIONS.GET, orgId: organizationId, userId: user.id}));
+        let fileData = JSON.parse(JSON.stringify(res.data));
+        let configDownloadFilePath = `${DEFAULT_CONFIG.CLIENT_CONFIG_PATH}/${user.name}.ovpn`
+        console.log(`Writing ${user.name}'s config to ${configDownloadFilePath}`);
+        await fs.writeFile(configDownloadFilePath, fileData.slice(fileData.indexOf("#{"), fileData.indexOf("</key>")+7), () => {});
+    });
 })();

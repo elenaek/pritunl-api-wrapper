@@ -1,6 +1,6 @@
 module.exports = {
     LIST: "LIST",
-    FIND: "FIND",
+    GET: "GET",
     CREATE: "CREATE",
     DELETE: "DELETE",
     UPDATE: "UPDATE"
