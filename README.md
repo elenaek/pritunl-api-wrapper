@@ -87,7 +87,7 @@ const Pritunl = require('pritunl-api-wrapper');
    let foundOrg = await organization.findOrganization("TooCool4SkewlOrg");
    let orgId = foundOrg.id;
    let usernameToFind = "CoolKid";
-   let foundUser = await user.findUser(orgId, usernameToFind);
+   let foundUser = await user.findUserByUsername(orgId, usernameToFind);
    console.log(foundUser);
    // ==> Outputs the user object for the first occurrence of the found user
 })()
@@ -107,7 +107,6 @@ const Pritunl = require('pritunl-api-wrapper');
    
    let foundOrg = await organization.findOrganization("TooCool4SkewlOrg");
    let orgId = foundOrg.id;
-   let usernameToFind = "CoolKid";
    let usersInOrgArr = await user.listUsers(orgId);
    let clientConfigDestinationPath = "./client_configs";
    key.downloadAllOrganizationClientConfigs(orgId, usersInOrgArr, clientConfigDestinationPath);

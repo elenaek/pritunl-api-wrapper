@@ -7,7 +7,6 @@ const {
 
 
 /*
-    Class that acts as the parent for all Pritunl APIs
     Constructor:
         Required:
             baseUrl: Base URL to use for Axios requests. No trailing forward slash.
