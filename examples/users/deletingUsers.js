@@ -2,7 +2,7 @@ const Pritunl = require('pritunl-api-wrapper');
 
 
 /*
-    Update a user named CoolKid to have the username BearCommander and set the user's pin to 12345678
+    Delete a user with the username CoolKid from the TooCool4SkewlOrg organization
 */
 (async() => {
     const priapi = new Pritunl();
@@ -11,16 +11,15 @@ const Pritunl = require('pritunl-api-wrapper');
 
     let foundOrg = await organization.findOrganizationByName("TooCool4SkewlOrg");
     let orgId = foundOrg.id;
-    let usernameToFind = "CoolKid";
     
+    let usernameToFind = "CoolKid";
     let foundUser = await user.findUserByUsername(orgId, usernameToFind);
-    user.updateUser(orgId, foundUser, {name: "BearCommander", pin: "12345678"});
 
+    user.deleteUser(orgId, foundUser);
 })()
 
-
 /*
-    Update all users who do not have pins to have the pin 12345678
+    Delete all users with Cool in their names in the TooCool4SkewlOrg organization
 */
 (async() => {
     const priapi = new Pritunl();
@@ -30,6 +29,10 @@ const Pritunl = require('pritunl-api-wrapper');
     let foundOrg = await organization.findOrganizationByName("TooCool4SkewlOrg");
     let orgId = foundOrg.id;
     
-    let usersWithoutPins = await user.findUsers(orgId, {pin: false, type: "client"});
-    user.updateUsers(orgId, usersWithoutPins, {pin: "12345678"})
+    let userSearchPattern = /[\w\d\s]*Cool[\w\d\s]*/g
+    let foundUsersArr = await user.findUsers(orgId, {
+        name: userSearchPattern
+    });
+
+    user.deleteUsers(orgId, foundUsersArr);
 })()

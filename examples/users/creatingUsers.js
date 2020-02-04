@@ -9,7 +9,7 @@ const Pritunl = require('pritunl-api-wrapper');
     const organization = priapi.Organization();
     const user = priapi.User();
 
-    let foundOrg = await organization.findOrganization("TooCool4SkewlOrg");
+    let foundOrg = await organization.findOrganizationByName("TooCool4SkewlOrg");
     let orgId = foundOrg.id;
 
     user.createUser(orgId, {name: "Coolkid"})
@@ -24,7 +24,7 @@ const Pritunl = require('pritunl-api-wrapper');
     const organization = priapi.Organization();
     const user = priapi.User();
 
-    let foundOrg = await organization.findOrganization("TooCool4SkewlOrg");
+    let foundOrg = await organization.findOrganizationByName("TooCool4SkewlOrg");
     let orgId = foundOrg.id;
 
     let usersToCreateArr = ["BearCommander", "BearSoldier", "BearSniper", "LazyBear"];

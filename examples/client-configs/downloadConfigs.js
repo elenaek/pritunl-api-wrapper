@@ -10,7 +10,7 @@ const Pritunl = require('pritunl-api-wrapper');
     const user = priapi.User();
     const key = priapi.Key();
 
-    let foundOrg = await organization.findOrganization("TooCool4SkewlOrg");
+    let foundOrg = await organization.findOrganizationByName("TooCool4SkewlOrg");
     let orgId = foundOrg.id;
     let usersInOrgArr = await user.listUsers(orgId);
     let clientConfigDestinationPath = "./client_configs";
@@ -30,7 +30,7 @@ const Pritunl = require('pritunl-api-wrapper');
     const user = priapi.User();
     const key = priapi.Key();
 
-    let foundOrg = await organization.findOrganization("TooCool4SkewlOrg");
+    let foundOrg = await organization.findOrganizationByName("TooCool4SkewlOrg");
     let orgId = foundOrg.id;
 
     let foundUser = await user.findUserByUsername(orgId, "bearcommander");

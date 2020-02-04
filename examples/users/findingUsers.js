@@ -9,7 +9,7 @@ const Pritunl = require('pritunl-api-wrapper');
     const organization = priapi.Organization();
     const user = priapi.User();
 
-    let foundOrg = await organization.findOrganization("TooCool4SkewlOrg");
+    let foundOrg = await organization.findOrganizationByName("TooCool4SkewlOrg");
     let orgId = foundOrg.id;
     let usernameToFind = "CoolKid";
     let foundUser = await user.findUserByUsername(orgId, usernameToFind);
@@ -26,7 +26,7 @@ const Pritunl = require('pritunl-api-wrapper');
     const organization = priapi.Organization();
     const user = priapi.User();
 
-    let foundOrg = await organization.findOrganization("TooCool4SkewlOrg");
+    let foundOrg = await organization.findOrganizationByName("TooCool4SkewlOrg");
     let orgId = foundOrg.id;
 
     let userToFindParams = {
@@ -48,7 +48,7 @@ const Pritunl = require('pritunl-api-wrapper');
     const organization = priapi.Organization();
     const user = priapi.User();
 
-    let foundOrg = await organization.findOrganization("TooCool4SkewlOrg");
+    let foundOrg = await organization.findOrganizationByName("TooCool4SkewlOrg");
     let orgId = foundOrg.id;
 
     let userSearchParams = {
@@ -63,7 +63,7 @@ const Pritunl = require('pritunl-api-wrapper');
 
 
 /*
-    Find users with all permutations of the word Bear in their username
+    Find users with any permutation of the word Bear in their username
     You can set a regex value in the name param to do a regex match for searching users
 */
 (async() => {
@@ -71,7 +71,7 @@ const Pritunl = require('pritunl-api-wrapper');
     const organization = priapi.Organization();
     const user = priapi.User();
 
-    let foundOrg = await organization.findOrganization("TooCool4SkewlOrg");
+    let foundOrg = await organization.findOrganizationByName("TooCool4SkewlOrg");
     let orgId = foundOrg.id;
 
     let nameSearchRegex = /Bear/gi;
@@ -82,3 +82,19 @@ const Pritunl = require('pritunl-api-wrapper');
     console.log(foundUsersArr);
 })()
 
+const Pritunl = require('pritunl-api-wrapper');
+
+
+/*
+    Find all users of type "client" in the TooCool4SkewlOrg organization
+*/
+(async() => {
+    const priapi = new Pritunl();
+    const organization = priapi.Organization();
+    const user = priapi.User();
+
+    let foundOrg = await organization.findOrganizationByName("TooCool4SkewlOrg");
+    let orgId = foundOrg.id;
+    let allClientTypeUsersArr = await user.findUsers(orgId, {type: "client"});
+    console.log(allClientTypeUsersArr);
+})()

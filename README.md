@@ -1,5 +1,5 @@
 # Pritunl API Wrapper
-* This module contains a few useful utility functions for working with the PritunlVPN API.
+* This API wrapper contains utility functions for working with the PritunlVPN API.
 
 
 ## Getting Started
@@ -86,7 +86,7 @@ const Pritunl = require('pritunl-api-wrapper');
     const organization = priapi.Organization();
     const user = priapi.User();
    
-   let foundOrg = await organization.findOrganization("TooCool4SkewlOrg");
+   let foundOrg = await organization.findOrganizationByName("TooCool4SkewlOrg");
    let orgId = foundOrg.id;
    let usernameToFind = "CoolKid";
    let foundUser = await user.findUserByUsername(orgId, usernameToFind);
@@ -107,7 +107,7 @@ const Pritunl = require('pritunl-api-wrapper');
     const user = priapi.User();
     const key = priapi.Key();
    
-   let foundOrg = await organization.findOrganization("TooCool4SkewlOrg");
+   let foundOrg = await organization.findOrganizationByName("TooCool4SkewlOrg");
    let orgId = foundOrg.id;
    let usersInOrgArr = await user.listUsers(orgId);
    let clientConfigDestinationPath = "./client_configs";
