@@ -3,3 +3,4 @@ config/*
 certs/*
 client_configs/*
 test.js
+logs
