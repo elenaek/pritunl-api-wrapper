@@ -9,6 +9,9 @@
 ### User
 * Contains functions dealing with Users
 * e.g. List all users, find users by params, find users by username, create/delete/update, user audit logs etc.
+### Admin
+* Contains functions for dealing with Admins
+* e.g. List all admins, find admins by params, find admins by username, create/delete/update, admin audit logs etc.
 ### Key
 * Contains functions to download all users or a single user's ovpn client config
 ### Log

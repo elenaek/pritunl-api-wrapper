@@ -3,7 +3,8 @@ const {
     Organization,
     User,
     Key,
-    Log
+    Log,
+    Admin
 } = require('./lib');
 
 
@@ -41,5 +42,9 @@ module.exports = class Pritunl extends Authentication{
 
     Log(){
         return new Log(this.props);
+    }
+
+    Admin(){
+        return new Admin(this.props);
     }
 }
