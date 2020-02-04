@@ -111,7 +111,7 @@ const Pritunl = require('pritunl-api-wrapper');
    let orgId = foundOrg.id;
    let usersInOrgArr = await user.listUsers(orgId);
    let clientConfigDestinationPath = "./client_configs";
-   key.downloadAllOrganizationClientConfigs(orgId, usersInOrgArr, clientConfigDestinationPath);
+   key.downloadUsersClientConfigs(orgId, usersInOrgArr, clientConfigDestinationPath);
    // ==> Will download and log to console each file downloaded
 })()
 ```

@@ -8,7 +8,7 @@
 * e.g. List all organizations, find an organization by name, etc.
 ### User
 * Contains functions dealing with Users
-* e.g. List all users, find users by params, find users by username, create/delete/update etc.
+* e.g. List all users, find users by params, find users by username, create/delete/update, user audit logs etc.
 ### Key
 * Contains functions to download all users or a single user's ovpn client config
 ### Log
