@@ -11,3 +11,6 @@
 * e.g. List all users, find users by params, find users by username, create/delete/update etc.
 ### Key
 * Contains functions to download all users or a single user's ovpn client config
+### Log
+* Contains functions for retrieving logs
+* e.g. retrieve system logs or dashboard logs
