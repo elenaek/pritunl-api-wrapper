@@ -7,6 +7,7 @@
 2. Set up your credentials using one of the following options:
      * Set the credentials during Pritunl object instantiation
      * Set environment variables
+3. See examples in the `/examples` directory for basic usage
 
 ## Setting your credentials
 ### Using parameters on Pritunl object
@@ -58,6 +59,7 @@
 
 ## Example Usage
 * Below are a few example uses for this API wrapper.
+* You'll find more examples in the `/examples` directory.
 
 
 #### Listing all Organizations

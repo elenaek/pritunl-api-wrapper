@@ -1,6 +1,6 @@
 {
   "name": "pritunl-api-wrapper",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Pritunl API wrapper",
   "main": "index.js",
   "scripts": {
